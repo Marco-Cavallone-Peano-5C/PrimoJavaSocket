@@ -5,11 +5,15 @@
  */
 package server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.internal.util.xml.impl.Input;
 
 /**
  *
@@ -28,8 +32,9 @@ public class Server
                 {
                     ServerSocket ss = new ServerSocket(1050);
                     Socket s = ss.accept();
-                    int i = s.getInputStream().read();
-                    System.out.println("Il server ha ricevuto: " + i);       
+                    InputStreamReader isr = new InputStreamReader(s.getInputStream());
+                    BufferedReader b = new BufferedReader(isr);
+                    System.out.println("Il server ha ricevuto: " + b.readLine());
                     ss.close();
                 }    
             } catch (IOException ex) {
